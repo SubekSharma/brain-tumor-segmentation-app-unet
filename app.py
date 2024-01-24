@@ -7,7 +7,7 @@ import base64
 import cv2
 import numpy as np
 import matplotlib.pyplot as plt
-
+ 
 H = 256
 W = 256
 
@@ -61,6 +61,23 @@ def show_image(image, title="Image"):
     plt.axis('off')
     st.pyplot()
 
+# Function to download sample images
+def download_sample_images():
+    sample_images_folder = "sample_images"
+    sample_images = os.listdir(sample_images_folder)
+
+    for image_name in sample_images:
+        image_path = os.path.join(sample_images_folder, image_name)
+        with open(image_path, "rb") as f:
+            image_bytes = f.read()
+            st.download_button(
+                label=f"Download {image_name}",
+                data=image_bytes,
+                key=f"download_{image_name}",
+                file_name=image_name,
+                mime="image/jpeg",
+            )
+
 # Streamlit app
 def main():
     st.title("Brain Tumor Segmentation App")
@@ -76,7 +93,7 @@ def main():
         original_image, mask, segmented_image = perform_inference(image)
 
         # Display images side by side
-        st.subheader("Image Comparison")
+        st.subheader("Results!")
         fig, axs = plt.subplots(1, 3, figsize=(15, 5))
 
         # Display original image
