@@ -93,7 +93,9 @@ def main():
         - Upload a brain scan image.
         - Or, download sample images below and check the predictions.
     """)
-
+    
+    download_sample_images()
+    
     if uploaded_file is not None:
         # Read the uploaded image
         image = cv2.imdecode(np.fromstring(uploaded_file.read(), np.uint8), cv2.IMREAD_COLOR)
