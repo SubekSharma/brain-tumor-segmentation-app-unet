@@ -1,6 +1,6 @@
 ---
 title: Brain Tumor Segmentation
-emoji: 😻
+emoji: 🧠
 colorFrom: pink
 colorTo: purple
 sdk: streamlit
