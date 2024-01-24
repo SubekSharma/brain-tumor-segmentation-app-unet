@@ -7,6 +7,7 @@ import base64
 import cv2
 import numpy as np
 import matplotlib.pyplot as plt
+import os
  
 H = 256
 W = 256
@@ -63,20 +64,22 @@ def show_image(image, title="Image"):
 
 # Function to download sample images
 def download_sample_images():
-    sample_images_folder = "sample_images"
-    sample_images = os.listdir(sample_images_folder)
+    sample_images = ["1.png", "2.png", "3.png"]  
 
     for image_name in sample_images:
-        image_path = os.path.join(sample_images_folder, image_name)
-        with open(image_path, "rb") as f:
-            image_bytes = f.read()
-            st.download_button(
-                label=f"Download {image_name}",
-                data=image_bytes,
-                key=f"download_{image_name}",
-                file_name=image_name,
-                mime="image/jpeg",
-            )
+        image_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), image_name)
+        if os.path.exists(image_path):
+            with open(image_path, "rb") as f:
+                image_bytes = f.read()
+                st.download_button(
+                    label=f"Download {image_name}",
+                    data=image_bytes,
+                    key=f"download_{image_name}",
+                    file_name=image_name,
+                    mime="image/jpeg",
+                )
+        else:
+            st.warning(f"Sample image {image_name} not found.")
 
 # Streamlit app
 def main():
@@ -84,6 +87,12 @@ def main():
 
     # Allow user to upload an image
     uploaded_file = st.file_uploader("Upload a brain scan image...", type=["jpg", "png", "jpeg"])
+
+    st.markdown("""
+        Example Instructions:
+        - Upload a brain scan image.
+        - Or, download sample images below and check the predictions.
+    """)
 
     if uploaded_file is not None:
         # Read the uploaded image
