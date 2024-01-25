@@ -1,8 +1,5 @@
 ---
 title: Brain Tumor Segmentation
-emoji: 🧠
-sdk: streamlit
-sdk_version: 1.30.0
 app_file: app.py
 license: mit
 ---
