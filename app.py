@@ -64,7 +64,7 @@ def show_image(image, title="Image"):
 
 # Function to download sample images
 def download_sample_images():
-    sample_images = ["1.png", "2.png", "3.png"]  
+    sample_images = ["Sample image 1.png", "Sample image 2.png", "Sample image 3.png"]  
 
     for image_name in sample_images:
         image_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), image_name)
